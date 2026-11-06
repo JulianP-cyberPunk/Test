@@ -1,7 +1,7 @@
 // Offline-Speicher. Bei Änderungen die Versionsnummer erhöhen.
-const CACHE = "tag-v1";
+const CACHE = "tag-v3";
 const FILES = ["./", "index.html", "styles.css", "data.js", "app.js", "manifest.webmanifest",
-  "icons/icon.svg", "icons/apple-touch-icon.png", "icons/icon-192.png", "icons/icon-512.png"];
+  "fonts/besley-latin.woff2", "icons/icon.svg", "icons/apple-touch-icon.png", "icons/icon-192.png", "icons/icon-512.png"];
 
 self.addEventListener("install", (e) => {
   e.waitUntil(caches.open(CACHE).then((c) => c.addAll(FILES)).then(() => self.skipWaiting()));

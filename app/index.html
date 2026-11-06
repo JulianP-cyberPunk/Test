@@ -2,10 +2,10 @@
 <html lang="de">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
   <title>Tag</title>
   <meta name="description" content="Dein Tagesrhythmus: Routinen, Handy weg, Ideen für jetzt.">
-  <meta name="theme-color" content="#cfe0ee">
+  <meta name="theme-color" content="#bfd8ec">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -13,20 +13,94 @@
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="preload" href="fonts/besley-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div class="sky" aria-hidden="true"></div>
 
+  <!-- Wiederverwendbare Icons: 24er Raster, eine Strichstärke -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1Z"/></symbol>
+      <symbol id="i-dumbbell" viewBox="0 0 24 24"><path d="M6.5 6.5v11M17.5 6.5v11M3.5 9v6M20.5 9v6M6.5 12h11"/></symbol>
+      <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2.5 4.5 13.5H11l-1 8 8.5-11H12l1-8Z"/></symbol>
+      <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></symbol>
+      <symbol id="i-book" viewBox="0 0 24 24"><path d="M12 6.5C10.5 5 8 4.5 4 4.5v14c4 0 6.5.5 8 2 1.5-1.5 4-2 8-2v-14c-4 0-6.5.5-8 2Z"/><path d="M12 6.5v14"/></symbol>
+      <symbol id="i-hammer" viewBox="0 0 24 24"><path d="m14 7-9.5 9.5a1.8 1.8 0 0 0 2.5 2.5L16.5 9.5"/><path d="m12.5 5.5 3-3 6 6-3 3-1.5-1.5-1.5 1.5-4.5-4.5 1.5-1.5Z"/></symbol>
+      <symbol id="i-tree" viewBox="0 0 24 24"><path d="M12 21v-6"/><path d="M12 3c-3.3 0-6 2.6-6 5.8 0 1 .3 1.9.7 2.7A4 4 0 0 0 9 18.5h6a4 4 0 0 0 2.3-7c.4-.8.7-1.7.7-2.7C18 5.6 15.3 3 12 3Z"/></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="4"/><path d="m8 12.5 2.8 2.8L16.5 9"/></symbol>
+      <symbol id="i-wave" viewBox="0 0 24 24"><path d="M2.5 9c2 0 2-1.5 4.75-1.5S10 9 12 9s2-1.5 4.75-1.5S19.5 9 21.5 9"/><path d="M2.5 15c2 0 2-1.5 4.75-1.5S10 15 12 15s2-1.5 4.75-1.5S19.5 15 21.5 15"/></symbol>
+      <symbol id="i-chat" viewBox="0 0 24 24"><path d="M20.5 12a8 8 0 0 1-11.7 7.1L3.5 20.5l1.4-4.6A8 8 0 1 1 20.5 12Z"/></symbol>
+      <symbol id="i-drop" viewBox="0 0 24 24"><path d="M12 3s6.5 6.6 6.5 11.2A6.5 6.5 0 0 1 5.5 14.2C5.5 9.6 12 3 12 3Z"/></symbol>
+      <symbol id="i-flame" viewBox="0 0 24 24"><path d="M12 21a6.5 6.5 0 0 0 6.5-6.5c0-4.5-4-6-4-10.5-3 1.5-4.5 4.5-4.5 7-1-.5-1.5-1.5-1.8-2.5C6.8 10 5.5 12 5.5 14.5A6.5 6.5 0 0 0 12 21Z"/></symbol>
+      <symbol id="i-phone" viewBox="0 0 24 24"><rect x="6.5" y="2.5" width="11" height="19" rx="2.5"/><path d="M10.5 18.5h3"/></symbol>
+      <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M5.6 18.4l2.8-2.8M15.6 8.4l2.8-2.8"/></symbol>
+      <symbol id="i-shuffle" viewBox="0 0 24 24"><path d="M3 7h3.5c4.5 0 6.5 10 11 10H21M3 17h3.5c1.6 0 2.8-1.3 3.8-2.8M14 9.8c1-1.5 2.1-2.8 3.5-2.8H21M18.5 4.5 21 7l-2.5 2.5M18.5 14.5 21 17l-2.5 2.5"/></symbol>
+      <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></symbol>
+      <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+      <symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol>
+    </defs>
+  </svg>
+
   <main class="page">
     <header class="top">
-      <p class="date" id="date"></p>
-      <h1 class="greeting" id="greeting">Guten Morgen</h1>
-      <p class="nudge" id="nudge"></p>
-      <button class="icon-btn settings-btn" id="openSettings" aria-label="Einstellungen">
-        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M12 15.5A3.5 3.5 0 1 1 12 8.5a3.5 3.5 0 0 1 0 7Zm7.4-2.5a7.6 7.6 0 0 0 0-2l2-1.6-2-3.4-2.4 1a7.4 7.4 0 0 0-1.7-1L15 3h-4l-.4 2.5a7.4 7.4 0 0 0-1.7 1l-2.4-1-2 3.4L6.6 11a7.6 7.6 0 0 0 0 2l-2 1.6 2 3.4 2.4-1a7.4 7.4 0 0 0 1.7 1L11 21h4l.4-2.5a7.4 7.4 0 0 0 1.7-1l2.4 1 2-3.4-2-1.6Z"/></svg>
-      </button>
+      <div class="top-left">
+        <h1 class="greeting" id="greeting">Guten Morgen</h1>
+      </div>
+      <div class="top-right">
+        <time class="clock" id="clock" aria-live="off">
+          <span class="clock-d" data-i="0"></span><span class="clock-d" data-i="1"></span><span class="clock-colon" aria-hidden="true">:</span><span class="clock-d" data-i="2"></span><span class="clock-d" data-i="3"></span>
+        </time>
+        <button class="icon-btn" id="openSettings" aria-label="Einstellungen">
+          <svg class="ic"><use href="#i-gear"/></svg>
+        </button>
+      </div>
     </header>
+    <p class="nudge" id="nudge"></p>
+
+    <!-- Widgets -->
+    <section class="widgets" aria-label="Überblick">
+      <article class="w w-arc" aria-labelledby="arcTitle">
+        <div class="w-head">
+          <h2 class="w-title" id="arcTitle">Dein Tag</h2>
+          <p class="w-meta" id="arcMeta"></p>
+        </div>
+        <svg class="arc" viewBox="0 0 320 128" aria-hidden="true">
+          <path id="arcTrack" class="arc-track" d="M16 116 A144 100 0 0 1 304 116"/>
+          <path id="arcDone" class="arc-done" d="M16 116 A144 100 0 0 1 304 116"/>
+          <g id="arcTicks" class="arc-ticks"></g>
+          <line class="arc-horizon" x1="4" y1="116" x2="316" y2="116"/>
+          <g id="arcSun" class="arc-sun">
+            <circle r="14" class="sun-halo"/>
+            <circle r="7.5" class="sun-core"/>
+          </g>
+        </svg>
+        <div class="arc-ends">
+          <span id="arcWake"></span>
+          <span id="arcBed"></span>
+        </div>
+      </article>
+
+      <article class="w w-date" aria-label="Datum">
+        <p class="wd-weekday" id="wdWeekday"></p>
+        <p class="wd-day" id="wdDay"></p>
+        <p class="wd-month" id="wdMonth"></p>
+        <p class="wd-week" id="wdWeek"></p>
+      </article>
+
+      <article class="w w-water" aria-labelledby="waterTitle">
+        <div class="w-head">
+          <h2 class="w-title" id="waterTitle">Wasser</h2>
+          <p class="w-meta"><span id="waterCount">0</span> von 8</p>
+        </div>
+        <div class="drops" id="drops" aria-hidden="true"></div>
+        <div class="water-btns">
+          <button class="round-btn" id="waterMinus" aria-label="Ein Glas weniger"><svg class="ic"><use href="#i-minus"/></svg></button>
+          <button class="round-btn primary" id="waterPlus" aria-label="Ein Glas getrunken"><svg class="ic"><use href="#i-plus"/></svg></button>
+        </div>
+      </article>
+    </section>
 
     <figure class="quote" id="quote">
       <blockquote id="quoteText"></blockquote>
@@ -34,29 +108,31 @@
       <button class="text-btn" id="nextQuote">Anderer Spruch</button>
     </figure>
 
-    <section class="block focus">
-      <label for="focusInput" class="block-title">Deine eine Sache heute</label>
+    <section class="panel focus">
+      <label for="focusInput" class="panel-title">Deine eine Sache heute</label>
       <div class="focus-row">
         <input id="focusInput" type="text" placeholder="z. B. 20 Minuten raus gehen" autocomplete="off" enterkeyhint="done">
-        <button class="check" id="focusDone" aria-label="Erledigt" aria-pressed="false"></button>
+        <button class="check-btn" id="focusDone" aria-label="Eine Sache erledigt" aria-pressed="false"><i class="check" aria-hidden="true"></i></button>
       </div>
     </section>
 
-    <section class="block routine">
+    <section class="panel routine">
       <div class="routine-head">
         <div class="seg" role="tablist" aria-label="Routine">
+          <span class="seg-pill" aria-hidden="true"></span>
           <button role="tab" id="tabMorning" aria-selected="true">Morgen</button>
           <button role="tab" id="tabEvening" aria-selected="false">Abend</button>
         </div>
-        <p class="streak" id="streak"></p>
+        <p class="routine-count" id="routineCount"></p>
       </div>
+      <div class="routine-bar" aria-hidden="true"><span id="routineBar"></span></div>
       <ul class="checklist" id="routineList"></ul>
-      <p class="routine-done" id="routineDone" hidden>Geschafft. Gut gemacht.</p>
     </section>
 
     <section class="phone-down" id="phoneDown">
       <p class="pd-time" id="bedtimeInfo"></p>
       <button class="pd-btn" id="brickBtn">
+        <svg class="ic pd-ic" aria-hidden="true"><use href="#i-phone"/></svg>
         <span class="pd-label">Handy weg</span>
         <span class="pd-sub" id="brickSub">Brick drauf und los</span>
       </button>
@@ -64,41 +140,77 @@
 
     <div class="actions">
       <button class="action" id="openIdeas">
+        <svg class="ic action-ic" aria-hidden="true"><use href="#i-spark"/></svg>
         <span class="action-title">Was mach ich jetzt?</span>
-        <span class="action-sub">Ideen für die nächsten Minuten</span>
+        <span class="action-sub">Über 100 Ideen für die nächsten Minuten</span>
       </button>
       <button class="action action-urge" id="openUrge">
+        <svg class="ic action-ic" aria-hidden="true"><use href="#i-wave"/></svg>
         <span class="action-title">Ich will scrollen</span>
         <span class="action-sub">10 Minuten aushalten</span>
       </button>
     </div>
 
-    <p class="tally" id="tally"></p>
+    <section class="widgets stats" aria-label="Deine Zahlen">
+      <article class="w w-stat">
+        <svg class="ic stat-ic" aria-hidden="true"><use href="#i-flame"/></svg>
+        <p class="stat-num" id="statStreak">0</p>
+        <p class="stat-label" id="statStreakLabel">Tage Serie</p>
+      </article>
+      <article class="w w-stat">
+        <svg class="ic stat-ic" aria-hidden="true"><use href="#i-check"/></svg>
+        <p class="stat-num" id="statDone">0</p>
+        <p class="stat-label">heute gemacht</p>
+      </article>
+      <article class="w w-stat">
+        <svg class="ic stat-ic" aria-hidden="true"><use href="#i-wave"/></svg>
+        <p class="stat-num" id="statWaves">0</p>
+        <p class="stat-label">Wellen überstanden</p>
+      </article>
+      <article class="w w-stat">
+        <svg class="ic stat-ic" aria-hidden="true"><use href="#i-phone"/></svg>
+        <p class="stat-num" id="statBrick">0</p>
+        <p class="stat-label">Mal Handy weg</p>
+      </article>
+    </section>
+
+    <section class="week" aria-labelledby="weekTitle">
+      <h2 class="w-title" id="weekTitle">Diese Woche</h2>
+      <ol class="week-days" id="weekDays"></ol>
+    </section>
   </main>
 
   <!-- Ideen -->
   <dialog class="sheet" id="ideasSheet" aria-labelledby="ideasTitle">
     <div class="sheet-inner">
+      <div class="sheet-grabber" aria-hidden="true"></div>
       <div class="sheet-head">
-        <button class="text-btn back" id="ideasBack" hidden>Zurück</button>
+        <button class="text-btn back" id="ideasBack" hidden><svg class="ic ic-sm"><use href="#i-chevron"/></svg>Zurück</button>
         <h2 id="ideasTitle">Was mach ich jetzt?</h2>
-        <button class="text-btn" data-close>Fertig</button>
+        <button class="text-btn done-btn" data-close>Fertig</button>
       </div>
-      <div id="ideasBody"></div>
+      <div class="ideas-body" id="ideasBody"></div>
     </div>
   </dialog>
 
   <!-- Drang -->
   <dialog class="sheet urge" id="urgeSheet" aria-labelledby="urgeTitle">
     <div class="sheet-inner">
+      <div class="sheet-grabber" aria-hidden="true"></div>
       <div class="sheet-head">
         <span></span>
         <h2 id="urgeTitle">Durchhalten</h2>
-        <button class="text-btn" data-close>Schließen</button>
+        <button class="text-btn done-btn" data-close>Schließen</button>
       </div>
       <p class="urge-lead">Der Drang ist eine Welle. Sie steigt und sie fällt wieder. Halte zehn Minuten durch, dann entscheidest du neu.</p>
-      <div class="timer" id="timer" role="timer" aria-live="off">10:00</div>
-      <div class="breath" id="breath" aria-hidden="true"><span></span></div>
+      <div class="timer-wrap">
+        <svg class="timer-ring" viewBox="0 0 200 200" aria-hidden="true">
+          <circle cx="100" cy="100" r="88" class="tr-track"/>
+          <circle cx="100" cy="100" r="88" class="tr-fill" id="timerFill"/>
+        </svg>
+        <div class="breath" aria-hidden="true"><span></span></div>
+        <div class="timer" id="timer" role="timer">10:00</div>
+      </div>
       <p class="breath-label" id="breathLabel">Einatmen</p>
       <p class="urge-try">Stattdessen jetzt:<br><strong id="urgeIdea"></strong></p>
       <div class="urge-buttons">
@@ -111,17 +223,24 @@
   <!-- Einstellungen -->
   <dialog class="sheet" id="settingsSheet" aria-labelledby="settingsTitle">
     <div class="sheet-inner">
+      <div class="sheet-grabber" aria-hidden="true"></div>
       <div class="sheet-head">
         <span></span>
         <h2 id="settingsTitle">Einstellungen</h2>
-        <button class="text-btn" data-close>Fertig</button>
+        <button class="text-btn done-btn" data-close>Fertig</button>
       </div>
 
-      <div class="field">
-        <label for="bedtime">Handy weg um</label>
-        <input type="time" id="bedtime">
-        <p class="hint">Tipp: Jede Woche 15 Minuten früher. Von 1:00 langsam Richtung 23:00.</p>
+      <div class="field two">
+        <div>
+          <label for="waketime">Aufstehen um</label>
+          <input type="time" id="waketime">
+        </div>
+        <div>
+          <label for="bedtime">Handy weg um</label>
+          <input type="time" id="bedtime">
+        </div>
       </div>
+      <p class="hint">Tipp: Jede Woche 15 Minuten früher. Von 1:00 langsam Richtung 23:00.</p>
 
       <div class="field">
         <span class="field-label">Morgenroutine</span>

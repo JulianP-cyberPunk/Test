@@ -78,7 +78,7 @@ const DEFAULT_ROUTINES = {
 // Ideen: alles alleine machbar, schnell, ohne Handy.
 const IDEA_GROUPS = [
   {
-    id: "sport", name: "Sport", emoji: "🏋️",
+    id: "sport", name: "Sport", icon: "bolt", hint: "Zuhause, ohne Geräte",
     items: [
       "20 Liegestütze, aufgeteilt wie du willst",
       "1 Minute Plank",
@@ -103,7 +103,24 @@ const IDEA_GROUPS = [
     ],
   },
   {
-    id: "skill", name: "Skill üben", emoji: "🎯",
+    id: "gym", name: "Gym", icon: "dumbbell", hint: "Kurze Einheiten, wenn du hingehst",
+    items: [
+      "Push-Tag: Bankdrücken, Schulterdrücken, Dips, je 3 Sätze",
+      "Pull-Tag: Klimmzüge, Rudern, Bizeps, je 3 Sätze",
+      "Bein-Tag: Kniebeugen, Beinpresse, Wadenheben",
+      "Ganzkörper in 40 Minuten: 5 Übungen à 3 Sätze",
+      "Nur hingehen und 20 Minuten aufs Laufband oder Rad",
+      "Eine neue Übung lernen und die Technik filmen",
+      "Ein persönliches Bestgewicht vorsichtig testen",
+      "Core-Zirkel: Hanging Leg Raises, Plank, Russian Twist",
+      "Dehnen und Mobility nach dem Training, 10 Minuten",
+      "Trainingsplan für die Woche auf Papier schreiben",
+      "Tasche für morgen packen, damit du sicher gehst",
+      "Mit jemandem aus dem Gym ein paar Worte reden",
+    ],
+  },
+  {
+    id: "skill", name: "Skill üben", icon: "target", hint: "Dranbleiben, besser werden",
     items: [
       "Handstand: 10 Minuten Balance üben",
       "Jonglieren lernen mit 3 Socken oder Bällen",
@@ -124,7 +141,7 @@ const IDEA_GROUPS = [
     ],
   },
   {
-    id: "lesen", name: "Lesen und Lernen", emoji: "📖",
+    id: "lesen", name: "Lesen und Lernen", icon: "book", hint: "Kopf füttern statt Feed",
     items: [
       "10 Seiten in einem Buch lesen",
       "Einen langen Artikel lesen statt Kurzvideos",
@@ -141,7 +158,7 @@ const IDEA_GROUPS = [
     ],
   },
   {
-    id: "bauen", name: "Etwas bauen", emoji: "🛠️",
+    id: "bauen", name: "Etwas bauen", icon: "hammer", hint: "Mit den Händen machen",
     items: [
       "Etwas reparieren, das schon lange kaputt ist",
       "Eine Skizze für ein eigenes Projekt machen",
@@ -158,7 +175,7 @@ const IDEA_GROUPS = [
     ],
   },
   {
-    id: "raus", name: "Raus gehen", emoji: "🌳",
+    id: "raus", name: "Raus gehen", icon: "tree", hint: "Licht und Luft",
     items: [
       "10 Minuten Spaziergang ums Haus",
       "Zum Bäcker gehen und was Frisches holen",
@@ -173,7 +190,7 @@ const IDEA_GROUPS = [
     ],
   },
   {
-    id: "ordnung", name: "Kleine Erfolge", emoji: "✅",
+    id: "ordnung", name: "Kleine Erfolge", icon: "check", hint: "Schnell erledigt, gutes Gefühl",
     items: [
       "Schreibtisch aufräumen, 5 Minuten",
       "Abwasch machen",
@@ -190,7 +207,7 @@ const IDEA_GROUPS = [
     ],
   },
   {
-    id: "ruhe", name: "Kopf frei", emoji: "🌊",
+    id: "ruhe", name: "Kopf frei", icon: "wave", hint: "Runterkommen",
     items: [
       "5 Minuten einfach atmen: 4 Sekunden ein, 6 aus",
       "Eine Seite Tagebuch schreiben",
@@ -205,7 +222,7 @@ const IDEA_GROUPS = [
     ],
   },
   {
-    id: "kontakt", name: "Kleiner Kontakt", emoji: "💬",
+    id: "kontakt", name: "Kleiner Kontakt", icon: "chat", hint: "Ein kleiner Schritt zu anderen",
     items: [
       "Einem Freund nur „Hey, wie geht's dir?“ schreiben",
       "Jemanden aus der Familie anrufen, 5 Minuten",
