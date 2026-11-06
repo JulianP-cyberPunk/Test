@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Tag</title>
+  <meta name="description" content="Dein Tagesrhythmus: Routinen, Handy weg, Ideen für jetzt.">
+  <meta name="theme-color" content="#cfe0ee">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Tag">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="sky" aria-hidden="true"></div>
+
+  <main class="page">
+    <header class="top">
+      <p class="date" id="date"></p>
+      <h1 class="greeting" id="greeting">Guten Morgen</h1>
+      <p class="nudge" id="nudge"></p>
+      <button class="icon-btn settings-btn" id="openSettings" aria-label="Einstellungen">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M12 15.5A3.5 3.5 0 1 1 12 8.5a3.5 3.5 0 0 1 0 7Zm7.4-2.5a7.6 7.6 0 0 0 0-2l2-1.6-2-3.4-2.4 1a7.4 7.4 0 0 0-1.7-1L15 3h-4l-.4 2.5a7.4 7.4 0 0 0-1.7 1l-2.4-1-2 3.4L6.6 11a7.6 7.6 0 0 0 0 2l-2 1.6 2 3.4 2.4-1a7.4 7.4 0 0 0 1.7 1L11 21h4l.4-2.5a7.4 7.4 0 0 0 1.7-1l2.4 1 2-3.4-2-1.6Z"/></svg>
+      </button>
+    </header>
+
+    <figure class="quote" id="quote">
+      <blockquote id="quoteText"></blockquote>
+      <figcaption id="quoteBy"></figcaption>
+      <button class="text-btn" id="nextQuote">Anderer Spruch</button>
+    </figure>
+
+    <section class="block focus">
+      <label for="focusInput" class="block-title">Deine eine Sache heute</label>
+      <div class="focus-row">
+        <input id="focusInput" type="text" placeholder="z. B. 20 Minuten raus gehen" autocomplete="off" enterkeyhint="done">
+        <button class="check" id="focusDone" aria-label="Erledigt" aria-pressed="false"></button>
+      </div>
+    </section>
+
+    <section class="block routine">
+      <div class="routine-head">
+        <div class="seg" role="tablist" aria-label="Routine">
+          <button role="tab" id="tabMorning" aria-selected="true">Morgen</button>
+          <button role="tab" id="tabEvening" aria-selected="false">Abend</button>
+        </div>
+        <p class="streak" id="streak"></p>
+      </div>
+      <ul class="checklist" id="routineList"></ul>
+      <p class="routine-done" id="routineDone" hidden>Geschafft. Gut gemacht.</p>
+    </section>
+
+    <section class="phone-down" id="phoneDown">
+      <p class="pd-time" id="bedtimeInfo"></p>
+      <button class="pd-btn" id="brickBtn">
+        <span class="pd-label">Handy weg</span>
+        <span class="pd-sub" id="brickSub">Brick drauf und los</span>
+      </button>
+    </section>
+
+    <div class="actions">
+      <button class="action" id="openIdeas">
+        <span class="action-title">Was mach ich jetzt?</span>
+        <span class="action-sub">Ideen für die nächsten Minuten</span>
+      </button>
+      <button class="action action-urge" id="openUrge">
+        <span class="action-title">Ich will scrollen</span>
+        <span class="action-sub">10 Minuten aushalten</span>
+      </button>
+    </div>
+
+    <p class="tally" id="tally"></p>
+  </main>
+
+  <!-- Ideen -->
+  <dialog class="sheet" id="ideasSheet" aria-labelledby="ideasTitle">
+    <div class="sheet-inner">
+      <div class="sheet-head">
+        <button class="text-btn back" id="ideasBack" hidden>Zurück</button>
+        <h2 id="ideasTitle">Was mach ich jetzt?</h2>
+        <button class="text-btn" data-close>Fertig</button>
+      </div>
+      <div id="ideasBody"></div>
+    </div>
+  </dialog>
+
+  <!-- Drang -->
+  <dialog class="sheet urge" id="urgeSheet" aria-labelledby="urgeTitle">
+    <div class="sheet-inner">
+      <div class="sheet-head">
+        <span></span>
+        <h2 id="urgeTitle">Durchhalten</h2>
+        <button class="text-btn" data-close>Schließen</button>
+      </div>
+      <p class="urge-lead">Der Drang ist eine Welle. Sie steigt und sie fällt wieder. Halte zehn Minuten durch, dann entscheidest du neu.</p>
+      <div class="timer" id="timer" role="timer" aria-live="off">10:00</div>
+      <div class="breath" id="breath" aria-hidden="true"><span></span></div>
+      <p class="breath-label" id="breathLabel">Einatmen</p>
+      <p class="urge-try">Stattdessen jetzt:<br><strong id="urgeIdea"></strong></p>
+      <div class="urge-buttons">
+        <button class="text-btn" id="urgeOther">Andere Idee</button>
+        <button class="pill" id="urgeWon">Geschafft, Drang ist weg</button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Einstellungen -->
+  <dialog class="sheet" id="settingsSheet" aria-labelledby="settingsTitle">
+    <div class="sheet-inner">
+      <div class="sheet-head">
+        <span></span>
+        <h2 id="settingsTitle">Einstellungen</h2>
+        <button class="text-btn" data-close>Fertig</button>
+      </div>
+
+      <div class="field">
+        <label for="bedtime">Handy weg um</label>
+        <input type="time" id="bedtime">
+        <p class="hint">Tipp: Jede Woche 15 Minuten früher. Von 1:00 langsam Richtung 23:00.</p>
+      </div>
+
+      <div class="field">
+        <span class="field-label">Morgenroutine</span>
+        <ul class="edit-list" id="editMorning"></ul>
+        <form class="add-row" data-list="morning">
+          <input type="text" placeholder="Neuer Punkt" aria-label="Neuer Punkt für Morgenroutine">
+          <button class="pill small">Hinzufügen</button>
+        </form>
+      </div>
+
+      <div class="field">
+        <span class="field-label">Abendroutine</span>
+        <ul class="edit-list" id="editEvening"></ul>
+        <form class="add-row" data-list="evening">
+          <input type="text" placeholder="Neuer Punkt" aria-label="Neuer Punkt für Abendroutine">
+          <button class="pill small">Hinzufügen</button>
+        </form>
+      </div>
+
+      <div class="field">
+        <span class="field-label">Aufs iPhone holen</span>
+        <p class="hint">In Safari öffnen, unten auf Teilen tippen, dann „Zum Home-Bildschirm“. Deine Daten bleiben nur auf diesem Gerät.</p>
+      </div>
+
+      <div class="field">
+        <button class="text-btn danger" id="resetAll">Alles zurücksetzen</button>
+      </div>
+    </div>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
