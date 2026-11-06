@@ -62,3 +62,7 @@ Automation **„Wecker“, dann „Wird gestoppt“**, Aktion **„Mitteilung an
 - **Ich will scrollen**: 10-Minuten-Timer mit Atemkreis und einer Sache, die du stattdessen machen kannst
 
 Alle Ideen und Sprüche stehen in `data.js` und lassen sich leicht erweitern.
+
+## Versionen
+
+Unter `varianten.html` gibt es vier Looks mit denselben Daten: **Himmel** (Startseite), **Knete**, **Raster** und **Notizbuch**. Öffne die gewünschte Version in Safari und lege genau diese auf den Home-Bildschirm.

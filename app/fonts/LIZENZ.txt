@@ -1,2 +1,3 @@
 Besley von Owen Earl (indestructible type*), lizenziert unter der SIL Open Font License 1.1.
 https://github.com/indestructible-type/Besley
+Fredoka, Nunito, Archivo, Caveat und Newsreader: jeweils SIL Open Font License 1.1, über Google Fonts.

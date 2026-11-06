@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
+  <title>Tag · Notizbuch</title>
+  <meta name="theme-color" content="#f4f6f7">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Tag">
+  <link rel="apple-touch-icon" href="../../icons/apple-touch-icon.png">
+  <link rel="preload" href="../../fonts/caveat-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../../fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="page">
+    <header class="head">
+      <div>
+        <p class="hand date" id="date"></p>
+        <p class="hello" id="hello"></p>
+      </div>
+      <svg class="watch" id="watch" viewBox="0 0 100 100" role="img" aria-label="Uhr">
+        <circle cx="50" cy="50" r="44" class="w-face"/>
+        <g id="wTicks" class="w-ticks"></g>
+        <line x1="50" y1="50" x2="50" y2="27" class="w-hour" id="wHour"/>
+        <line x1="50" y1="50" x2="50" y2="15" class="w-min" id="wMin"/>
+        <circle cx="50" cy="50" r="3.2" class="w-pin"/>
+      </svg>
+    </header>
+    <p class="nudge hand" id="nudge"></p>
+
+    <!-- Tageslinie -->
+    <section class="sec">
+      <h2 class="hand h">Mein Tag</h2>
+      <div class="line-wrap">
+        <svg class="dayline" viewBox="0 0 340 70" aria-hidden="true" preserveAspectRatio="none">
+          <path id="dayPath" d="M8 46 C 60 40, 90 52, 140 44 S 230 38, 270 46 S 320 50, 332 44" class="dl-path"/>
+          <path id="dayDone" d="M8 46 C 60 40, 90 52, 140 44 S 230 38, 270 46 S 320 50, 332 44" class="dl-done"/>
+          <g id="dayYou"><circle r="6" class="dl-dot"/></g>
+        </svg>
+        <p class="hand you" id="youLabel">du bist hier</p>
+      </div>
+      <div class="ends hand"><span id="dWake"></span><span id="dLeft"></span><span id="dBed"></span></div>
+    </section>
+
+    <!-- Eine Sache -->
+    <section class="sec">
+      <h2 class="hand h"><label for="focus">Heute zählt nur das:</label></h2>
+      <div class="focus-row">
+        <span class="hl-wrap"><input id="focus" type="text" placeholder="…" autocomplete="off" enterkeyhint="done"><span class="hl" aria-hidden="true"></span></span>
+        <button class="cb" id="focusDone" aria-label="Erledigt" aria-pressed="false"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="3" y="4" width="25" height="24" rx="3" class="cb-box"/><path d="M8 17 L14 23 L28 6" class="cb-tick"/></svg></button>
+      </div>
+    </section>
+
+    <!-- Routine -->
+    <section class="sec">
+      <div class="tabs" role="tablist" aria-label="Routine">
+        <button role="tab" id="tM" class="hand" aria-selected="true">Morgens</button>
+        <span class="hand slash" aria-hidden="true">/</span>
+        <button role="tab" id="tE" class="hand" aria-selected="false">Abends</button>
+      </div>
+      <ul class="checks" id="checks"></ul>
+    </section>
+
+    <!-- Spruch mit Klebeband -->
+    <figure class="note quote">
+      <span class="tape" aria-hidden="true"></span>
+      <blockquote id="q"></blockquote>
+      <figcaption class="hand" id="qBy"></figcaption>
+      <button class="hand link" id="qNext">anderer Spruch</button>
+    </figure>
+
+    <!-- Wasser als Strichliste -->
+    <section class="sec water">
+      <h2 class="hand h">Wasser</h2>
+      <button class="tally-btn" id="waterPlus" aria-label="Ein Glas getrunken">
+        <svg class="tally" id="tally" viewBox="0 0 200 50" aria-hidden="true"></svg>
+        <span class="hand tally-hint" id="waterHint"></span>
+      </button>
+      <button class="hand link small" id="waterMinus">einen Strich weg</button>
+    </section>
+
+    <!-- Ideen als Zettel -->
+    <section class="sec">
+      <h2 class="hand h">Was mach ich jetzt?</h2>
+      <button class="pull" id="pull"><span class="hand">Zieh einen Zettel</span></button>
+      <div class="drawn" id="drawn" hidden>
+        <p class="drawn-g hand" id="drawnG"></p>
+        <p class="drawn-t" id="drawnT"></p>
+        <div class="drawn-b">
+          <button class="hand link" id="drawnAgain">noch einer</button>
+          <button class="hand ink-btn" id="drawnGo">mach ich</button>
+        </div>
+      </div>
+      <div class="stickies" id="stickies"></div>
+    </section>
+
+    <!-- Stempel -->
+    <section class="sec stamp-sec">
+      <p class="hand bed" id="bedInfo"></p>
+      <button class="stamp-btn" id="stamp" aria-label="Handy weg stempeln">
+        <span class="stamp-pad" aria-hidden="true">Handy weg</span>
+      </button>
+      <div class="stamped" id="stamped" aria-hidden="true"><span>Handy weg</span><small id="stampDate"></small></div>
+      <button class="hand link" id="urge">Ich will scrollen. Hilf mir.</button>
+    </section>
+
+    <!-- Woche -->
+    <section class="sec">
+      <h2 class="hand h">Diese Woche</h2>
+      <ol class="cal" id="cal"></ol>
+      <p class="hand legend">Kreis = Morgen geschafft, Doppelkreis = Morgen und Abend</p>
+    </section>
+
+    <p class="foot"><a class="hand" href="../../varianten.html">andere Versionen ansehen</a></p>
+  </main>
+
+  <dialog class="sheet" id="noteSheet" aria-labelledby="noteT">
+    <div class="sheet-in">
+      <div class="sheet-top"><h2 class="hand" id="noteT"></h2><button class="hand link" data-close>zu</button></div>
+      <ul class="checks" id="noteList"></ul>
+    </div>
+  </dialog>
+
+  <dialog class="sheet" id="urgeSheet" aria-labelledby="uT">
+    <div class="sheet-in center">
+      <div class="sheet-top"><h2 class="hand" id="uT">Kurz atmen</h2><button class="hand link" data-close>zu</button></div>
+      <svg class="u-ring" viewBox="0 0 200 200" aria-hidden="true">
+        <circle cx="100" cy="100" r="80" class="u-track"/>
+        <circle cx="100" cy="100" r="80" class="u-fill" id="uFill"/>
+        <circle cx="100" cy="100" r="40" class="u-breath-c"/>
+      </svg>
+      <p class="u-time" id="uTime">10:00</p>
+      <p class="hand u-b" id="uBreath">einatmen</p>
+      <p class="u-idea">Stattdessen: <b id="uIdea"></b></p>
+      <div class="drawn-b">
+        <button class="hand link" id="uOther">andere Idee</button>
+        <button class="hand ink-btn" id="uWon">geschafft</button>
+      </div>
+    </div>
+  </dialog>
+
+  <script src="../../data.js"></script>
+  <script src="../../core.js"></script>
+  <script src="ui.js"></script>
+</body>
+</html>
