@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
+  <title>Tag · Knete</title>
+  <meta name="theme-color" content="#fff3dc">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Tag">
+  <link rel="apple-touch-icon" href="../../icons/apple-touch-icon.png">
+  <link rel="preload" href="../../fonts/fredoka-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../../fonts/caveat-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="page">
+    <header class="top">
+      <div>
+        <p class="hello" id="hello"></p>
+        <p class="nudge" id="nudge"></p>
+      </div>
+      <time class="clock" id="clock"><span class="d"></span><span class="d"></span><span class="colon">:</span><span class="d"></span><span class="d"></span></time>
+    </header>
+
+    <!-- Level -->
+    <section class="clay level" aria-labelledby="lvlTitle">
+      <div class="lvl-badge" aria-hidden="true"><svg class="ic"><use href="../../icons.svg#i-star"/></svg><span id="lvlNum">1</span></div>
+      <div class="lvl-txt">
+        <h2 id="lvlTitle">Level <span id="lvlNum2">1</span></h2>
+        <p id="lvlSub">Noch 100 XP bis Level 2</p>
+        <div class="xp"><span id="xpBar"></span></div>
+      </div>
+      <p class="xp-today"><b id="xpToday">0</b><small>XP heute</small></p>
+    </section>
+
+    <div class="row2">
+      <section class="clay date" aria-label="Datum">
+        <p class="date-wd" id="dateWd"></p>
+        <p class="date-num" id="dateNum"></p>
+        <p class="date-mo" id="dateMo"></p>
+      </section>
+      <section class="clay water" aria-labelledby="waterT">
+        <h2 id="waterT">Wasser</h2>
+        <div class="glass" aria-hidden="true"><span id="glassFill"></span><b id="waterNum">0</b></div>
+        <div class="water-btns">
+          <button class="nub" id="waterMinus" aria-label="Ein Glas weniger"><svg class="ic"><use href="../../icons.svg#i-minus"/></svg></button>
+          <button class="nub blue" id="waterPlus" aria-label="Ein Glas getrunken"><svg class="ic"><use href="../../icons.svg#i-plus"/></svg></button>
+        </div>
+      </section>
+    </div>
+
+    <!-- Würfel -->
+    <section class="clay dice-box" aria-labelledby="diceT">
+      <h2 id="diceT">Was mach ich jetzt?</h2>
+      <p class="dice-sub">Würfeln, oder such dir eine Kiste aus.</p>
+      <button class="dice" id="dice" aria-label="Würfeln"><svg class="ic"><use href="../../icons.svg#i-dice"/></svg></button>
+      <div class="dice-result" id="diceResult" hidden>
+        <p class="dr-group" id="drGroup"></p>
+        <p class="dr-text" id="drText"></p>
+        <div class="dr-btns">
+          <button class="chip" id="drAgain">Nochmal</button>
+          <button class="chip go" id="drGo">Mach ich +15 XP</button>
+        </div>
+      </div>
+      <div class="boxes" id="boxes"></div>
+    </section>
+
+    <section class="clay routine">
+      <div class="tabs" role="tablist" aria-label="Routine">
+        <button role="tab" id="tM" aria-selected="true"><svg class="ic"><use href="../../icons.svg#i-sun"/></svg>Morgen</button>
+        <button role="tab" id="tE" aria-selected="false"><svg class="ic"><use href="../../icons.svg#i-moon"/></svg>Abend</button>
+      </div>
+      <ul class="todo" id="todo"></ul>
+    </section>
+
+    <section class="clay focus">
+      <label for="focus">Deine eine Sache heute <small>+25 XP</small></label>
+      <div class="focus-row">
+        <input id="focus" type="text" placeholder="z. B. 20 Minuten raus" autocomplete="off" enterkeyhint="done">
+        <button class="tick" id="focusDone" aria-label="Erledigt" aria-pressed="false"></button>
+      </div>
+    </section>
+
+    <figure class="quote">
+      <span class="tape" aria-hidden="true"></span>
+      <blockquote id="qText"></blockquote>
+      <figcaption class="q-by" id="qBy"></figcaption>
+      <button class="link" id="qNext">Anderer Spruch</button>
+    </figure>
+
+    <div class="big-btns">
+      <button class="big phone" id="brick">
+        <svg class="ic"><use href="../../icons.svg#i-phone"/></svg>
+        <b>Handy weg</b>
+        <small id="bedInfo"></small>
+      </button>
+      <button class="big wave" id="urge">
+        <svg class="ic"><use href="../../icons.svg#i-wave"/></svg>
+        <b>Ich will scrollen</b>
+        <small>10 Min. aushalten, +20 XP</small>
+      </button>
+    </div>
+
+    <section class="clay week" aria-labelledby="weekT">
+      <h2 id="weekT">Deine Woche</h2>
+      <ol class="wk" id="wk"></ol>
+    </section>
+
+    <p class="foot"><a href="../../varianten.html">Andere Versionen</a></p>
+  </main>
+
+  <dialog class="sheet" id="boxSheet" aria-labelledby="boxTitle">
+    <div class="sheet-in">
+      <div class="sheet-top"><h2 id="boxTitle"></h2><button class="nub" data-close aria-label="Schließen"><svg class="ic"><use href="../../icons.svg#i-x"/></svg></button></div>
+      <ul class="idea-list" id="boxList"></ul>
+    </div>
+  </dialog>
+
+  <dialog class="sheet urge" id="urgeSheet" aria-labelledby="urgeT">
+    <div class="sheet-in">
+      <div class="sheet-top"><h2 id="urgeT">Welle reiten</h2><button class="nub" data-close aria-label="Schließen"><svg class="ic"><use href="../../icons.svg#i-x"/></svg></button></div>
+      <div class="blob-wrap"><div class="blob" aria-hidden="true"></div><p class="u-time" id="uTime">10:00</p></div>
+      <p class="u-breath" id="uBreath">Einatmen</p>
+      <p class="u-idea">Stattdessen: <b id="uIdea"></b></p>
+      <div class="dr-btns center">
+        <button class="chip" id="uOther">Andere Idee</button>
+        <button class="chip go" id="uWon">Geschafft +20 XP</button>
+      </div>
+    </div>
+  </dialog>
+
+  <script src="../../data.js"></script>
+  <script src="../../core.js"></script>
+  <script src="ui.js"></script>
+</body>
+</html>

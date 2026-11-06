@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
+  <title>Tag · Raster</title>
+  <meta name="theme-color" content="#e9ebee">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Tag">
+  <link rel="apple-touch-icon" href="../../icons/apple-touch-icon.png">
+  <link rel="preload" href="../../fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="grid">
+    <section class="t t-clock" style="--d:0ms" aria-label="Uhrzeit">
+      <time class="clock" id="clock"><span class="d"></span><span class="d"></span><span class="colon" aria-hidden="true">:</span><span class="d"></span><span class="d"></span></time>
+      <div class="clock-foot">
+        <h1 id="hello"></h1>
+        <p id="nudge"></p>
+      </div>
+    </section>
+
+    <section class="t t-date" style="--d:60ms" aria-label="Datum">
+      <p class="lbl" id="wd"></p>
+      <p class="huge" id="day"></p>
+      <p class="sub" id="mo"></p>
+    </section>
+
+    <section class="t t-left" style="--d:110ms" aria-label="Wache Zeit">
+      <p class="lbl">Noch wach</p>
+      <p class="huge" id="leftH"></p>
+      <p class="sub" id="leftSub"></p>
+    </section>
+
+    <section class="t t-ruler" style="--d:150ms" aria-labelledby="rulerT">
+      <div class="row-between"><h2 class="lbl" id="rulerT">Aufstehen bis Handy weg</h2><p class="lbl mono" id="rulerPct"></p></div>
+      <div class="ruler" id="ruler" aria-hidden="true"><div class="ruler-fill" id="rulerFill"></div><div class="ruler-ticks" id="rulerTicks"></div><div class="ruler-mark" id="rulerMark"></div></div>
+      <div class="row-between sub"><span id="rWake"></span><span id="rBed"></span></div>
+    </section>
+
+    <section class="t t-small t-water" style="--d:150ms" aria-labelledby="waterT">
+      <h2 class="lbl" id="waterT">Wasser</h2>
+      <button class="big-num" id="waterPlus" aria-label="Ein Glas getrunken"><span id="water">0</span><small>/8</small></button>
+      <div class="bars" id="waterBars" aria-hidden="true"></div>
+      <button class="tiny" id="waterMinus">Eins zurück</button>
+    </section>
+    <section class="t t-small" style="--d:150ms">
+      <h2 class="lbl">Serie</h2>
+      <p class="big-num" id="streak">0</p>
+      <p class="sub" id="streakSub">Tage</p>
+    </section>
+    <section class="t t-small" style="--d:150ms">
+      <h2 class="lbl">Heute</h2>
+      <p class="big-num" id="done">0</p>
+      <p class="sub">erledigt</p>
+    </section>
+
+    <section class="t t-focus" style="--d:150ms">
+      <label class="lbl" for="focus">Die eine Sache</label>
+      <div class="focus-row">
+        <input id="focus" type="text" placeholder="Was zählt heute?" autocomplete="off" enterkeyhint="done">
+        <button class="box" id="focusDone" aria-label="Erledigt" aria-pressed="false"></button>
+      </div>
+    </section>
+
+    <section class="t t-routine" style="--d:150ms">
+      <div class="switch" role="tablist" aria-label="Routine">
+        <button role="tab" id="tM" aria-selected="true">Morgen</button>
+        <button role="tab" id="tE" aria-selected="false">Abend</button>
+        <span class="lbl mono" id="rCount"></span>
+      </div>
+      <ul class="list" id="list"></ul>
+    </section>
+
+    <section class="t t-ideas" style="--d:150ms" aria-labelledby="ideasT">
+      <div class="row-between"><h2 class="h" id="ideasT">Was mach ich jetzt?</h2><button class="tiny" id="shuffle">Zufall</button></div>
+      <div class="cats" id="cats" role="tablist" aria-label="Kategorien"></div>
+      <div class="idea-card">
+        <p class="idea-text" id="ideaText"></p>
+        <div class="row-between">
+          <button class="tiny" id="ideaNext">Nächste</button>
+          <button class="solid" id="ideaGo">Mach ich</button>
+        </div>
+      </div>
+      <details class="all">
+        <summary>Alle Ideen dieser Kategorie</summary>
+        <ul class="list compact" id="ideaList"></ul>
+      </details>
+    </section>
+
+    <button class="t t-act accent" id="brick" style="--d:150ms">
+      <span class="lbl">Brick</span>
+      <b>Handy weg</b>
+      <small id="bedInfo"></small>
+    </button>
+    <button class="t t-act ink" id="urge" style="--d:150ms">
+      <span class="lbl">Drang</span>
+      <b>Ich will scrollen</b>
+      <small>10 Minuten aushalten</small>
+    </button>
+
+    <section class="t t-quote" style="--d:150ms">
+      <p class="q" id="q"></p>
+      <div class="row-between"><span class="sub" id="qBy"></span><button class="tiny" id="qNext">Anderer Spruch</button></div>
+    </section>
+
+    <section class="t t-week" style="--d:150ms" aria-labelledby="weekT">
+      <div class="row-between"><h2 class="lbl" id="weekT">Woche</h2><span class="lbl mono" id="weekSum"></span></div>
+      <ol class="week" id="week"></ol>
+    </section>
+
+    <p class="foot"><a href="../../varianten.html">Andere Versionen</a></p>
+  </main>
+
+  <dialog class="urge" id="urgeSheet" aria-labelledby="uT">
+    <div class="urge-in">
+      <div class="row-between"><h2 class="lbl" id="uT">Durchhalten</h2><button class="tiny light" data-close>Schließen</button></div>
+      <p class="u-time" id="uTime">10:00</p>
+      <div class="u-line"><span id="uLine"></span></div>
+      <p class="u-breath" id="uBreath">Einatmen</p>
+      <p class="u-idea" id="uIdea"></p>
+      <div class="row-between">
+        <button class="tiny light" id="uOther">Andere Idee</button>
+        <button class="solid light" id="uWon">Drang ist weg</button>
+      </div>
+    </div>
+  </dialog>
+
+  <script src="../../data.js"></script>
+  <script src="../../core.js"></script>
+  <script src="ui.js"></script>
+</body>
+</html>

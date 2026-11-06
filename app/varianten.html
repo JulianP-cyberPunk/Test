@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Tag · Versionen</title>
+  <meta name="theme-color" content="#14161c">
+  <style>
+    @font-face { font-family: "Besley"; src: url("fonts/besley-latin.woff2") format("woff2"); font-weight: 400 700; font-display: swap; }
+    * { box-sizing: border-box; }
+    html { background: #14161c; -webkit-text-size-adjust: 100%; }
+    body { margin: 0; color: #eef0f5; font-family: -apple-system, system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+    header { max-width: 1200px; margin: 0 auto; padding: calc(env(safe-area-inset-top) + 28px) 20px 10px; }
+    h1 { margin: 0; font-family: "Besley", Georgia, serif; font-size: 40px; line-height: 1.05; letter-spacing: -0.02em; }
+    header p { margin: 10px 0 0; max-width: 56ch; color: #a9afbd; line-height: 1.5; }
+    .list { max-width: 1200px; margin: 0 auto; padding: 18px 20px 40px; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 28px; }
+    .v { display: flex; flex-direction: column; gap: 12px; }
+    .phone { position: relative; width: 100%; aspect-ratio: 390 / 760; border-radius: 34px; overflow: hidden; background: #000; box-shadow: 0 0 0 8px #262a33, 0 30px 50px -20px #000; }
+    .phone iframe { position: absolute; top: 0; left: 0; width: 390px; height: 760px; border: 0; transform-origin: 0 0; pointer-events: none; }
+    .v h2 { margin: 6px 0 0; font-size: 20px; }
+    .v p { margin: 0; color: #a9afbd; font-size: 15px; line-height: 1.45; }
+    .skills { font-size: 13px !important; color: #7f8697 !important; }
+    .open { align-self: flex-start; display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px; border-radius: 999px; background: #eef0f5; color: #14161c; font-weight: 600; text-decoration: none; }
+    .open:active { transform: scale(0.97); }
+    .note { max-width: 1200px; margin: 0 auto; padding: 0 20px calc(env(safe-area-inset-bottom) + 30px); color: #7f8697; font-size: 14px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Vier Versionen von Tag</h1>
+    <p>Gleiche Funktionen, gleiche Daten, vier verschiedene Welten. Deine Haken, Wasser und Zähler sind in allen Versionen dieselben. Probier sie aus und behalte die, die dich am meisten zieht.</p>
+  </header>
+
+  <main class="list">
+    <article class="v">
+      <div class="phone"><iframe src="index.html" title="Vorschau Himmel" loading="lazy" tabindex="-1"></iframe></div>
+      <h2>Himmel</h2>
+      <p>Die Farben folgen dem Tag, ein Sonnenbogen zeigt deine wache Zeit. Ruhig und klar.</p>
+      <p class="skills">impeccable, mobile-native, emil-design-eng</p>
+      <a class="open" href="index.html">Öffnen</a>
+    </article>
+    <article class="v">
+      <div class="phone"><iframe src="v/knete/" title="Vorschau Knete" loading="lazy" tabindex="-1"></iframe></div>
+      <h2>Knete</h2>
+      <p>Verspielt wie ein Spiel: Level und XP für alles, was du tust. Würfel für Ideen, bunte Kisten.</p>
+      <p class="skills">ui-ux-pro-max (Claymorphism), emil-design-eng</p>
+      <a class="open" href="v/knete/">Öffnen</a>
+    </article>
+    <article class="v">
+      <div class="phone"><iframe src="v/raster/" title="Vorschau Raster" loading="lazy" tabindex="-1"></iframe></div>
+      <h2>Raster</h2>
+      <p>Schweizer Stil: riesige Uhr, Kacheln, ein Lineal für den Tag. Ideen direkt auf der Seite.</p>
+      <p class="skills">ui-ux-pro-max (Swiss), choreograph, impeccable</p>
+      <a class="open" href="v/raster/">Öffnen</a>
+    </article>
+    <article class="v">
+      <div class="phone"><iframe src="v/notizbuch/" title="Vorschau Notizbuch" loading="lazy" tabindex="-1"></iframe></div>
+      <h2>Notizbuch</h2>
+      <p>Wie ein Bullet Journal: Handschrift, analoge Uhr, Strichliste fürs Wasser, Zettel ziehen, Stempel für Handy weg.</p>
+      <p class="skills">animate, impeccable</p>
+      <a class="open" href="v/notizbuch/">Öffnen</a>
+    </article>
+  </main>
+  <p class="note">Tipp: Die Version, die du auf den Home-Bildschirm legst, öffnet sich danach direkt.</p>
+
+  <script>
+    // Vorschauen auf die Kachelbreite skalieren
+    const fit = () => document.querySelectorAll(".phone").forEach((p) => {
+      const f = p.querySelector("iframe");
+      f.style.transform = `scale(${p.clientWidth / 390})`;
+    });
+    addEventListener("resize", fit);
+    fit();
+  </script>
+</body>
+</html>
