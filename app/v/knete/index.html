@@ -9,6 +9,7 @@
   <meta name="apple-mobile-web-app-title" content="Tag">
   <link rel="apple-touch-icon" href="../../icons/apple-touch-icon.png">
   <link rel="preload" href="../../fonts/fredoka-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../../fonts/caveat-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -80,11 +81,12 @@
       </div>
     </section>
 
-    <section class="quote">
-      <p id="qText"></p>
-      <p class="q-by" id="qBy"></p>
+    <figure class="quote">
+      <span class="tape" aria-hidden="true"></span>
+      <blockquote id="qText"></blockquote>
+      <figcaption class="q-by" id="qBy"></figcaption>
       <button class="link" id="qNext">Anderer Spruch</button>
-    </section>
+    </figure>
 
     <div class="big-btns">
       <button class="big phone" id="brick">

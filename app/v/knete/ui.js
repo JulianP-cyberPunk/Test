@@ -164,7 +164,7 @@
   let q = T.quoteOfDay();
   function renderQuote() {
     $("qText").textContent = `„${q.t}“`;
-    $("qBy").textContent = q.a || "";
+    $("qBy").textContent = q.a ? `– ${q.a}` : "";
   }
   $("qNext").addEventListener("click", () => { q = T.otherQuote(q); renderQuote(); T.restart($("qText"), "swap"); });
 
